@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
             location: "Суботица, Сербия",
             contact_btn: "Связаться со мной",
             download_cv: "Скачать CV",
+            nav_about: "О себе",
+            nav_experience: "Опыт",
+            nav_skills: "Навыки",
+            nav_contact: "Контакты",
             about_title: "О себе",
             about_text: `Более трёх лет опыта в качестве QA инженера, работал в командах, использующих методологии Scrum, Lean и в хаотичной разработке.<br>
 Уверенно работаю с таск-трекерами и ТМС (YouTrack, Jira, ClickUp, QAcoverage, Qase, Doqa).<br>
@@ -96,6 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
             location: "Subotica, Serbia",
             contact_btn: "Contact Me",
             download_cv: "Download CV",
+            nav_about: "Profile",
+            nav_experience: "Experience",
+            nav_skills: "Skills",
+            nav_contact: "Contact",
             about_title: "Profile",
             about_text: `Having more than three years of experience as a QA engineer, worked in teams using Scrum, Lean, and fully chaotic development.<br>
 Confident working with task trackers and test management systems (YouTrack, Jira, ClickUp, QAcoverage, Qase, Doqa).<br>
@@ -318,17 +326,38 @@ Understand the key differences between microservice architecture and a monolith 
 
     sections.forEach(section => observer.observe(section));
 
-    // Custom Ultra-Smooth Scroll for Contact Button
-    const scrollBtn = document.getElementById('scrollToContact');
-    if (scrollBtn) {
-        scrollBtn.addEventListener('click', (e) => {
+    // Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+
+    function toggleMenu() {
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
+
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu();
+        });
+    });
+
+    // Custom Ultra-Smooth Scroll for All Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.getElementById('contact');
+            const targetId = this.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
+
             if (target) {
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
                 const startPosition = window.pageYOffset;
                 const distance = targetPosition - startPosition;
-                const duration = 1500;
+                const duration = 1200; // Slightly faster than the contact button
                 let start = null;
 
                 function step(timestamp) {
@@ -342,7 +371,20 @@ Understand the key differences between microservice architecture and a monolith 
                 window.requestAnimationFrame(step);
             }
         });
-    }
+    });
+
+    // Simplify Contact Button to use the generic handler (remove duplicate logic if desired, or keep specific if different duration needed)
+    // Removed specific scrollToContact logic since the generic handler above covers it (and it has an ID, so it works).
+
+    // Desktop Nav Scroll Effect
+    const desktopNav = document.querySelector('.desktop-nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            desktopNav.classList.add('scrolled');
+        } else {
+            desktopNav.classList.remove('scrolled');
+        }
+    });
 
     // Fix for refresh jump
     if (window.location.hash) {

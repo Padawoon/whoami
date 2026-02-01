@@ -11,11 +11,33 @@
 </head>
 
 <body>
+    <nav class="desktop-nav">
+        <a href="#about" data-i18n="nav_about">О себе</a>
+        <a href="#experience" data-i18n="nav_experience">Опыт</a>
+        <a href="#skills" data-i18n="nav_skills">Навыки</a>
+        <a href="#contact" data-i18n="nav_contact">Контакты</a>
+    </nav>
+
     <div class="top-actions">
+        <!-- Desktop Nav removed from here -->
         <button id="langToggle" class="action-btn">RU</button>
         <button id="themeToggle" class="action-btn" aria-label="Toggle Theme">
             <i class="fas fa-moon"></i>
         </button>
+        <button id="mobileMenuBtn" class="action-btn mobile-menu-btn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMenuBtn" class="close-btn"><i class="fas fa-times"></i></button>
+        <nav class="mobile-nav">
+            <a href="#about" data-i18n="nav_about">О себе</a>
+            <a href="#experience" data-i18n="nav_experience">Опыт</a>
+            <a href="#skills" data-i18n="nav_skills">Навыки</a>
+            <a href="#contact" data-i18n="nav_contact">Контакты</a>
+        </nav>
     </div>
     <!-- Background Decorations -->
     <div class="background-container">

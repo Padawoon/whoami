@@ -122,7 +122,51 @@ body {
     right: 1.5rem;
     display: flex;
     gap: 1rem;
+    align-items: center;
     z-index: 1000;
+}
+
+.desktop-nav {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 3rem;
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    transition: all 0.4s ease;
+    /* Smooth transition for background */
+}
+
+.desktop-nav.scrolled {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    padding: 0.5rem 2rem;
+    /* Slightly wider when scrolled for emphasis */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.desktop-nav a {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    /* Larger text */
+    font-weight: 600;
+    transition: all 0.3s;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+}
+
+.desktop-nav a:hover {
+    color: var(--primary);
+    opacity: 1;
+    transform: translateY(-2px);
+    /* Subtle lift */
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    /* Glow effect */
 }
 
 .action-btn {
@@ -141,11 +185,78 @@ body {
     font-weight: 700;
     font-size: 0.9rem;
     font-family: inherit;
+    z-index: 1001;
+    /* Ensure buttons are above menu if needed */
 }
 
 .action-btn:hover {
     transform: scale(1.1);
     background: var(--glass-border);
+}
+
+.mobile-menu-btn {
+    display: none;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 2rem;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.mobile-nav a {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.mobile-nav a:hover {
+    color: var(--primary);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg);
+    color: var(--primary);
 }
 
 /* Sections */
@@ -279,6 +390,14 @@ h1 {
         top: 1rem;
         right: 1rem;
         gap: 0.5rem;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
     }
 
     .action-btn {
