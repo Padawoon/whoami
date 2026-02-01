@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 html {
     scroll-behavior: smooth;
@@ -43,7 +43,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
     background-color: var(--bg);
     color: var(--light);
     line-height: 1.6;
