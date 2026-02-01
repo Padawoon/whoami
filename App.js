@@ -211,6 +211,12 @@ Understand the key differences between microservice architecture and a monolith 
         // Update Validation Messages
         updateValidationMessages();
 
+        // Update CV Link
+        const cvBtn = document.getElementById('downloadCvBtn');
+        if (cvBtn) {
+            cvBtn.href = lang === 'ru' ? 'd.khitryi_qa_cv_ru.pdf' : 'd.khitryi_qa_cv_en.pdf';
+        }
+
         // Re-init Timeline
         initTimeline();
     }
