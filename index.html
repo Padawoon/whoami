@@ -122,11 +122,12 @@
                 <a href="tel:+381629437651"><i class="fas fa-phone"></i> +381 62 943 7651</a>
                 <a href="https://t.me/dkhitryi" target="_blank"><i class="fab fa-telegram"></i> @dkhitryi</a>
             </div>
-            <form id="contactForm" style="margin-top: 2rem;" action="https://formsubmit.co/dima@khitryi.com"
-                method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="New submission from Business Card">
+            <form id="contactForm" style="margin-top: 2rem;" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="30e24f7d-18ef-4949-b819-7709c7689b04">
+                <!-- Optional: Custom subject -->
+                <input type="hidden" name="subject" value="New submission from Business Card">
+                <!-- Optional: Spambot protection (honeypot) -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                 <div class="form-group">
                     <label data-i18n="form_name">Имя</label>

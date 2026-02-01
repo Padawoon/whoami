@@ -376,6 +376,62 @@ Understand the key differences between microservice architecture and a monolith 
     // Simplify Contact Button to use the generic handler (remove duplicate logic if desired, or keep specific if different duration needed)
     // Removed specific scrollToContact logic since the generic handler above covers it (and it has an ID, so it works).
 
+    // Web3Forms AJAX Submission
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const langData = translations[currentLang];
+            const originalBtnText = submitBtn.textContent;
+
+            submitBtn.textContent = langData.form_sending;
+            submitBtn.disabled = true;
+
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        successMsg.innerHTML = langData.form_success;
+                        successMsg.style.display = 'block';
+                        successMsg.style.color = '#4ade80';
+                        contactForm.reset();
+                        setTimeout(() => {
+                            successMsg.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        console.log(response);
+                        successMsg.innerHTML = json.message || langData.form_error;
+                        successMsg.style.display = 'block';
+                        successMsg.style.color = '#ef4444';
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    successMsg.innerHTML = langData.server_error;
+                    successMsg.style.display = 'block';
+                    successMsg.style.color = '#ef4444';
+                })
+                .then(function () {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        });
+    }
+
     // Desktop Nav Scroll Effect
     const desktopNav = document.querySelector('.desktop-nav');
     window.addEventListener('scroll', () => {
