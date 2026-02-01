@@ -1,0 +1,23 @@
+
+# Mac OS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.venv
+env/
+
+# Node
+node_modules/
+npm-debug.log
+
+# VSCode
+.vscode/
+
+# Brain/Agent
+.gemini/
+.agent/

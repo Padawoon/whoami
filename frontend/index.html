@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dmitrii Khitryi | Senior QA Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="top-actions">
+        <button id="langToggle" class="action-btn">RU</button>
+        <button id="themeToggle" class="action-btn" aria-label="Toggle Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+    <!-- Background Decorations -->
+    <div class="background-container">
+        <div class="bg-gradient"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 id="name" data-i18n="name">Дмитрий Хитрый</h1>
+            <p class="subtitle" data-i18n="title">Senior QA Engineer (Backend & Mobile)</p>
+            <p style="color: var(--gray); margin-bottom: 2rem;"><i class="fas fa-location-dot"></i> <span
+                    data-i18n="location">Суботица, Сербия</span></p>
+            <div class="header-actions">
+                <a href="#" id="scrollToContact" class="btn btn-primary" data-i18n="contact_btn">Связаться со мной</a>
+                <a href="d.khitryi_qa_cv.pdf" class="btn btn-outline" target="_blank"><i class="fas fa-file-pdf"></i>
+                    <span data-i18n="download_cv">Скачать CV</span></a>
+            </div>
+        </header>
+
+        <section id="about" class="glass-card">
+            <h2 data-i18n="about_title">О себе</h2>
+            <p data-i18n="about_text">Более трёх лет опыта в качестве QA инженера, работал в командах, использующих
+                методологии Scrum, Lean и в
+                хаотичной разработке.<br>
+                Уверенно работаю с таск-трекерами и ТМС (YouTrack, Jira, ClickUp, QAcoverage, Qase, Doqa).<br>
+                Разрабатываю и поддерживаю тестовую документацию: тест-кейсы, чек-листы и прочие артефакты.<br>
+                Тестирую RESTful API с помощью инструментов Postman, Swagger и др.<br>
+                Работаю с БД: пишу сложные запросы с джойнами и агрегациями, проверяю миграции и результаты сидеров,
+                смотрю наличие индексов, погружаюсь в ERD.<br>
+                Имею опыт работы в Linux: анализ логов, проверка портов сервисов, работа с конфигами и энвами.<br>
+                Понимаю git: ставлю ветки для тестов, запускаю пайплайны в Gitlab.<br>
+                Это же касается и работы с Android Studio.<br>
+                Знаю в чём ключевая разница микросервисной архитектуры от монолита и как это влияет на тестирование.</p>
+        </section>
+
+        <section id="experience" class="glass-card">
+            <h2 data-i18n="experience_title">Опыт работы</h2>
+            <div class="timeline" id="experienceTimeline">
+                <!-- Content will be injected by App.js -->
+            </div>
+        </section>
+
+        <section id="skills" class="glass-card">
+            <h2 data-i18n="skills_title">Навыки</h2>
+            <div class="skill-grid">
+                <div class="skill-category">
+                    <h3 data-i18n="skills_tools"><i class="fas fa-tools"></i> Инструменты</h3>
+                    <p data-i18n="skills_tools_list">Postman, Swagger, OpenAPI, Mockoon, DBeaver, GitLab (Pipelines),
+                        Android Studio, Chrome DevTools,
+                        RabbitMQ
+                        (AMQP), Selenium, Grafana, Kibana, Opensearch, JAM</p>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="skills_db"><i class="fas fa-database"></i> БД и Linux</h3>
+                    <p data-i18n="skills_db_list">PostgreSQL, MySQL, SQLite, MongoDB, Redis, Linux (Bash), Log Analysis,
+                        ERD (ER Diagrams),
+                        Relational Databases</p>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="skills_testing"><i class="fas fa-vial"></i> Тестирование</h3>
+                    <p data-i18n="skills_testing_list">REST API, GraphQL, Microservices, Mobile (iOS, Android), MacOS,
+                        Functional, Regression,
+                        Integration, E2E, Smoke, UX/UI, SQL Testing, L3 Support, Troubleshooting</p>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="skills_tms"><i class="fas fa-clipboard-check"></i> TMS и Процессы</h3>
+                    <p data-i18n="skills_tms_list">Jira, YouTrack, ClickUp, Qase, Doqa, Agile (Scrum, Kanban), SDLC,
+                        Test Design (Test Cases,
+                        Checklists, Scenarios), Bug Tracking, User Stories</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="glass-card">
+            <h2 data-i18n="contact_title">Контакты</h2>
+            <div class="contact-methods">
+                <a href="mailto:dima@khitryi.com"><i class="fas fa-envelope"></i> dima@khitryi.com</a>
+                <a href="tel:+381629437651"><i class="fas fa-phone"></i> +381 62 943 7651</a>
+                <a href="https://t.me/dkhitryi" target="_blank"><i class="fab fa-telegram"></i> @dkhitryi</a>
+            </div>
+            <form id="contactForm" style="margin-top: 2rem;" action="https://formsubmit.co/dima@khitryi.com"
+                method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="New submission from Business Card">
+
+                <div class="form-group">
+                    <label data-i18n="form_name">Имя</label>
+                    <input type="text" id="nameInput" name="name" required maxlength="100"
+                        data-i18n-attr="placeholder:form_name_placeholder" placeholder="Ваше имя">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="form_email">Email</label>
+                    <input type="email" id="emailInput" name="email" required maxlength="150"
+                        data-i18n-attr="placeholder:form_email_placeholder" placeholder="example@mail.com">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="form_message">Сообщение</label>
+                    <textarea id="messageInput" name="message" rows="5" required maxlength="2000"
+                        data-i18n-attr="placeholder:form_message_placeholder"
+                        placeholder="Ваше сообщение..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitBtn" data-i18n="form_submit">Отправить
+                    сообщение</button>
+                <p id="successMsg" class="success-msg" data-i18n="form_success">Сообщение успешно отправлено!</p>
+            </form>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; Dmitrii Khitryi 2026</p>
+        </footer>
+    </div>
+
+    <script src="App.js"></script>
+</body>
+
+</html>
