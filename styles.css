@@ -213,13 +213,16 @@ body {
     align-items: center;
     gap: 2rem;
     opacity: 0;
+    visibility: hidden;
+    /* Ensure it's not clickable or visible to screen readers when closed */
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     padding: 2rem;
 }
 
 .mobile-menu.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: all;
 }
 
