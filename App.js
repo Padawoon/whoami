@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const translations = {
         ru: {
             name: "Дмитрий Хитрый",
-            title: "Senior QA Engineer (Backend & Mobile)",
+            title: "QA Engineer (Backend & Mobile)",
             location: "Суботица, Сербия",
             contact_btn: "Связаться со мной",
             download_cv: "Скачать CV",
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         en: {
             name: "Dmitrii Khitryi",
-            title: "Senior QA Engineer (Backend & Mobile)",
+            title: "QA Engineer (Backend & Mobile)",
             location: "Subotica, Serbia",
             contact_btn: "Contact Me",
             download_cv: "Download CV",
