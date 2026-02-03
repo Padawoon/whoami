@@ -191,7 +191,11 @@ Understand the key differences between microservice architecture and a monolith 
         }
     };
 
-    let currentLang = localStorage.getItem('lang') || 'ru';
+    let currentLang = localStorage.getItem('lang');
+    if (!currentLang) {
+        const userLang = navigator.language || navigator.userLanguage;
+        currentLang = userLang.toLowerCase().startsWith('ru') ? 'ru' : 'en';
+    }
 
     function setLanguage(lang) {
         currentLang = lang;
