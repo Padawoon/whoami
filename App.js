@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Localization Data
     const translations = {
         ru: {
             name: "Дмитрий Хитрый",
@@ -191,266 +190,399 @@ Understand the key differences between microservice architecture and a monolith 
         }
     };
 
-    let currentLang = localStorage.getItem('lang');
-    if (!currentLang) {
-        const userLang = navigator.language || navigator.userLanguage;
-        currentLang = userLang.toLowerCase().startsWith('ru') ? 'ru' : 'en';
+    const state = {
+        currentLang: 'en'
+    };
+
+    const elements = {
+        langToggle: document.getElementById('langToggle'),
+        downloadCvBtn: document.getElementById('downloadCvBtn'),
+        themeToggle: document.getElementById('themeToggle'),
+        mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+        closeMenuBtn: document.getElementById('closeMenuBtn'),
+        mobileMenu: document.getElementById('mobileMenu'),
+        desktopNav: document.querySelector('.desktop-nav'),
+        contactForm: document.getElementById('contactForm'),
+        submitBtn: document.getElementById('submitBtn'),
+        successMsg: document.getElementById('successMsg')
+    };
+
+    function normalizeRichText(value) {
+        if (typeof value !== 'string') return '';
+        return value
+            .replace(/<br\s*\/?>/gi, '\n')
+            .replace(/<\/?strong>/gi, '');
     }
 
-    function setLanguage(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        document.documentElement.lang = lang;
-        const data = translations[lang];
-
-        // Update Text Content
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (data[key]) el.innerHTML = data[key];
-        });
-
-        // Update Attributes
-        document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-            const attrData = el.getAttribute('data-i18n-attr').split(':');
-            const attr = attrData[0];
-            const key = attrData[1];
-            if (data[key]) el.setAttribute(attr, data[key]);
-        });
-
-        // Update Button Label
-        document.getElementById('langToggle').textContent = lang.toUpperCase();
-
-        // Update Validation Messages
-        updateValidationMessages();
-
-        // Update CV Link
-        const cvBtn = document.getElementById('downloadCvBtn');
-        if (cvBtn) {
-            cvBtn.href = lang === 'ru' ? 'd.khitryi_qa_cv_ru.pdf' : 'd.khitryi_qa_cv_en.pdf';
-        }
-
-        // Re-init Timeline
-        initTimeline();
+    function getInitialLanguage() {
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang && translations[savedLang]) return savedLang;
+        const userLang = navigator.language || navigator.userLanguage || 'en';
+        return userLang.toLowerCase().startsWith('ru') ? 'ru' : 'en';
     }
 
     function updateValidationMessages() {
-        const data = translations[currentLang];
-        document.querySelectorAll('input[required], textarea[required]').forEach(el => {
-            if (el.value === "") {
+        const data = translations[state.currentLang];
+        document.querySelectorAll('input[required], textarea[required]').forEach((el) => {
+            if (el.value === '') {
                 el.setCustomValidity(data.form_validation_required);
             } else {
-                el.setCustomValidity("");
+                el.setCustomValidity('');
             }
         });
     }
 
-    // Attach validation listeners to all required fields
-    document.querySelectorAll('input[required], textarea[required]').forEach(el => {
-        el.addEventListener('invalid', () => {
-            el.setCustomValidity(translations[currentLang].form_validation_required);
+    function applyTextTranslations() {
+        const data = translations[state.currentLang];
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+            const key = el.getAttribute('data-i18n');
+            const value = data[key];
+            if (typeof value === 'string') {
+                el.textContent = normalizeRichText(value);
+            }
         });
-        el.addEventListener('input', () => {
-            el.setCustomValidity("");
+    }
+
+    function applyAttributeTranslations() {
+        const data = translations[state.currentLang];
+        document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+            const [attr, key] = el.getAttribute('data-i18n-attr').split(':');
+            if (attr && key && data[key]) {
+                el.setAttribute(attr, normalizeRichText(data[key]));
+            }
         });
-    });
+    }
 
-    function initTimeline() {
-        const timeline = document.getElementById('experienceTimeline');
-        if (!timeline) return;
-
-        const data = translations[currentLang].experience;
-        timeline.innerHTML = data.map((exp, index) => `
-            <div class="timeline-item ${index === 0 ? 'active' : ''}">
-                <div class="timeline-header">
-                    <div class="timeline-header-info">
-                        <h3>${exp.role} — ${exp.company}</h3>
-                        <p class="date">${exp.date}</p>
-                    </div>
-                    <i class="fas fa-chevron-down timeline-icon"></i>
-                </div>
-                <div class="timeline-content">
-                    <ul>
-                        ${exp.items.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </div>
-            </div>
-        `).join('');
-
-        // Re-attach listeners after re-render
-        const timelineHeaders = timeline.querySelectorAll('.timeline-header');
-        timelineHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                const isActive = item.classList.contains('active');
-                timeline.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
-                if (!isActive) item.classList.add('active');
+    function attachValidationListeners() {
+        document.querySelectorAll('input[required], textarea[required]').forEach((el) => {
+            el.addEventListener('invalid', () => {
+                el.setCustomValidity(translations[state.currentLang].form_validation_required);
+            });
+            el.addEventListener('input', () => {
+                el.setCustomValidity('');
             });
         });
     }
 
-    // Initialize Localization
-    setLanguage(currentLang);
+    function setLanguage(lang) {
+        state.currentLang = translations[lang] ? lang : 'en';
+        localStorage.setItem('lang', state.currentLang);
+        document.documentElement.lang = state.currentLang;
 
-    // Lang Toggle listener
-    document.getElementById('langToggle').addEventListener('click', () => {
-        setLanguage(currentLang === 'ru' ? 'en' : 'ru');
-    });
+        applyTextTranslations();
+        applyAttributeTranslations();
+        updateValidationMessages();
+        renderTimeline();
 
-    // Theme Toggle logic
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-    const themeIcon = themeToggle.querySelector('i');
-
-    if (localStorage.getItem('theme') === 'light') {
-        body.classList.add('light-mode');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-    }
-
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        const isLight = body.classList.contains('light-mode');
-        if (isLight) {
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('theme', 'light');
-        } else {
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
-            localStorage.setItem('theme', 'dark');
+        if (elements.langToggle) {
+            elements.langToggle.textContent = state.currentLang.toUpperCase();
         }
-    });
 
-    // Intersection Observer for animations
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    sections.forEach(section => observer.observe(section));
-
-    // Mobile Menu Logic
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const closeMenuBtn = document.getElementById('closeMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
-
-    function toggleMenu() {
-        mobileMenu.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        if (elements.downloadCvBtn) {
+            elements.downloadCvBtn.href = state.currentLang === 'ru' ? 'd.khitryi_qa_cv_ru.pdf' : 'd.khitryi_qa_cv_en.pdf';
+        }
     }
 
-    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMenu);
-    if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
+    function renderTimeline() {
+        const timeline = document.getElementById('experienceTimeline');
+        if (!timeline) return;
 
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            toggleMenu();
-        });
-    });
+        timeline.replaceChildren();
+        const data = translations[state.currentLang].experience;
 
-    // Custom Ultra-Smooth Scroll for All Anchor Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const target = document.getElementById(targetId);
+        data.forEach((exp, index) => {
+            const item = document.createElement('div');
+            item.className = 'timeline-item';
+            if (index === 0) item.classList.add('active');
 
-            if (target) {
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                const startPosition = window.pageYOffset;
-                const distance = targetPosition - startPosition;
-                const duration = 1200; // Slightly faster than the contact button
-                let start = null;
+            const headerId = `timeline-header-${index}`;
+            const contentId = `timeline-content-${index}`;
 
-                function step(timestamp) {
-                    if (!start) start = timestamp;
-                    const progress = timestamp - start;
-                    const percentage = Math.min(progress / duration, 1);
-                    const easing = percentage < 0.5 ? 4 * percentage * percentage * percentage : 1 - Math.pow(-2 * percentage + 2, 3) / 2;
-                    window.scrollTo(0, startPosition + distance * easing);
-                    if (progress < duration) window.requestAnimationFrame(step);
+            const header = document.createElement('button');
+            header.className = 'timeline-header';
+            header.type = 'button';
+            header.id = headerId;
+            header.setAttribute('aria-controls', contentId);
+            header.setAttribute('aria-expanded', index === 0 ? 'true' : 'false');
+
+            const headerInfo = document.createElement('div');
+            headerInfo.className = 'timeline-header-info';
+
+            const title = document.createElement('h3');
+            title.textContent = `${normalizeRichText(exp.role)} — ${normalizeRichText(exp.company)}`;
+
+            const date = document.createElement('p');
+            date.className = 'date';
+            date.textContent = normalizeRichText(exp.date);
+
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-chevron-down timeline-icon';
+            icon.setAttribute('aria-hidden', 'true');
+
+            const content = document.createElement('div');
+            content.className = 'timeline-content';
+            content.id = contentId;
+            content.setAttribute('role', 'region');
+            content.setAttribute('aria-labelledby', headerId);
+            content.hidden = index !== 0;
+
+            const list = document.createElement('ul');
+            exp.items.forEach((entry) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = normalizeRichText(entry);
+                list.appendChild(listItem);
+            });
+
+            content.appendChild(list);
+            headerInfo.append(title, date);
+            header.append(headerInfo, icon);
+            item.append(header, content);
+            timeline.appendChild(item);
+
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                timeline.querySelectorAll('.timeline-item').forEach((node) => {
+                    node.classList.remove('active');
+                    const nodeHeader = node.querySelector('.timeline-header');
+                    const nodeContent = node.querySelector('.timeline-content');
+                    if (nodeHeader) nodeHeader.setAttribute('aria-expanded', 'false');
+                    if (nodeContent) nodeContent.hidden = true;
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                    header.setAttribute('aria-expanded', 'true');
+                    content.hidden = false;
                 }
-                window.requestAnimationFrame(step);
+            });
+        });
+    }
+
+    function initThemeToggle() {
+        if (!elements.themeToggle) return;
+
+        const body = document.body;
+        const themeIcon = elements.themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        elements.themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            if (themeIcon) {
+                themeIcon.classList.toggle('fa-sun', isLight);
+                themeIcon.classList.toggle('fa-moon', !isLight);
+            }
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    }
+
+    function initSectionAnimations() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const sections = document.querySelectorAll('section');
+
+        if (prefersReducedMotion) {
+            sections.forEach((section) => section.classList.add('visible'));
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach((section) => observer.observe(section));
+    }
+
+    function initMenu() {
+        if (!elements.mobileMenu || !elements.mobileMenuBtn || !elements.closeMenuBtn) return;
+
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        let isOpen = false;
+
+        function setMenuState(open) {
+            isOpen = open;
+            elements.mobileMenu.classList.toggle('active', open);
+            elements.mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+            elements.mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.style.overflow = open ? 'hidden' : '';
+
+            if (open) {
+                elements.closeMenuBtn.focus();
+            } else {
+                elements.mobileMenuBtn.focus();
+            }
+        }
+
+        elements.mobileMenuBtn.addEventListener('click', () => setMenuState(true));
+        elements.closeMenuBtn.addEventListener('click', () => setMenuState(false));
+
+        mobileNavLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                if (isOpen) setMenuState(false);
+            });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && isOpen) {
+                setMenuState(false);
             }
         });
-    });
+    }
 
-    // Simplify Contact Button to use the generic handler (remove duplicate logic if desired, or keep specific if different duration needed)
-    // Removed specific scrollToContact logic since the generic handler above covers it (and it has an ID, so it works).
+    function initAnchorScroll() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let activeAnimationFrame = null;
 
-    // Web3Forms AJAX Submission
-    const contactForm = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const successMsg = document.getElementById('successMsg');
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (event) => {
+                const targetId = anchor.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (!target) return;
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const langData = translations[currentLang];
-            const originalBtnText = submitBtn.textContent;
+                event.preventDefault();
+                if (prefersReducedMotion) {
+                    target.scrollIntoView({ behavior: 'auto', block: 'start' });
+                    window.history.pushState({}, '', `#${targetId}`);
+                    return;
+                }
 
-            submitBtn.textContent = langData.form_sending;
-            submitBtn.disabled = true;
+                if (activeAnimationFrame) {
+                    window.cancelAnimationFrame(activeAnimationFrame);
+                    activeAnimationFrame = null;
+                }
 
-            const formData = new FormData(contactForm);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
+                const startY = window.pageYOffset;
+                const targetY = target.getBoundingClientRect().top + window.pageYOffset;
+                const distance = targetY - startY;
+                const duration = 1900;
+                let startTime = null;
 
-            fetch('https://api.web3forms.com/submit', {
+                function easeInOutCubic(t) {
+                    if (t < 0.5) return 4 * t * t * t;
+                    return 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                function animateScroll(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const elapsed = timestamp - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = easeInOutCubic(progress);
+
+                    window.scrollTo(0, startY + distance * eased);
+
+                    if (progress < 1) {
+                        activeAnimationFrame = window.requestAnimationFrame(animateScroll);
+                    } else {
+                        activeAnimationFrame = null;
+                        window.history.pushState({}, '', `#${targetId}`);
+                    }
+                }
+
+                activeAnimationFrame = window.requestAnimationFrame(animateScroll);
+            });
+        });
+    }
+
+    async function submitContactForm(event) {
+        event.preventDefault();
+        if (!elements.contactForm || !elements.submitBtn || !elements.successMsg) return;
+
+        const langData = translations[state.currentLang];
+
+        const originalBtnText = elements.submitBtn.textContent;
+        elements.submitBtn.textContent = langData.form_sending;
+        elements.submitBtn.disabled = true;
+
+        const formData = new FormData(elements.contactForm);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    Accept: 'application/json'
                 },
-                body: json
-            })
-                .then(async (response) => {
-                    let json = await response.json();
-                    if (response.status == 200) {
-                        successMsg.innerHTML = langData.form_success;
-                        successMsg.style.display = 'block';
-                        successMsg.style.color = '#4ade80';
-                        contactForm.reset();
-                        setTimeout(() => {
-                            successMsg.style.display = 'none';
-                        }, 5000);
-                    } else {
-                        console.log(response);
-                        successMsg.innerHTML = json.message || langData.form_error;
-                        successMsg.style.display = 'block';
-                        successMsg.style.color = '#ef4444';
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                    successMsg.innerHTML = langData.server_error;
-                    successMsg.style.display = 'block';
-                    successMsg.style.color = '#ef4444';
-                })
-                .then(function () {
-                    submitBtn.textContent = originalBtnText;
-                    submitBtn.disabled = false;
-                });
+                body: JSON.stringify(payload)
+            });
+
+            let responseData = {};
+            try {
+                responseData = await response.json();
+            } catch (_error) {
+                responseData = {};
+            }
+
+            if (response.ok) {
+                elements.successMsg.textContent = langData.form_success;
+                elements.successMsg.style.display = 'block';
+                elements.successMsg.style.color = '#4ade80';
+                elements.contactForm.reset();
+                setTimeout(() => {
+                    elements.successMsg.style.display = 'none';
+                }, 5000);
+            } else {
+                elements.successMsg.textContent = responseData.message || langData.form_error;
+                elements.successMsg.style.display = 'block';
+                elements.successMsg.style.color = '#ef4444';
+            }
+        } catch (_error) {
+            elements.successMsg.textContent = langData.server_error;
+            elements.successMsg.style.display = 'block';
+            elements.successMsg.style.color = '#ef4444';
+        } finally {
+            elements.submitBtn.textContent = originalBtnText;
+            elements.submitBtn.disabled = false;
+        }
+    }
+
+    function initContactForm() {
+        if (!elements.contactForm) return;
+        elements.contactForm.addEventListener('submit', submitContactForm);
+    }
+
+    function initDesktopNavScroll() {
+        if (!elements.desktopNav) return;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                elements.desktopNav.classList.add('scrolled');
+            } else {
+                elements.desktopNav.classList.remove('scrolled');
+            }
         });
     }
 
-    // Desktop Nav Scroll Effect
-    const desktopNav = document.querySelector('.desktop-nav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            desktopNav.classList.add('scrolled');
-        } else {
-            desktopNav.classList.remove('scrolled');
-        }
-    });
+    function init() {
+        state.currentLang = getInitialLanguage();
+        attachValidationListeners();
+        setLanguage(state.currentLang);
+        initThemeToggle();
+        initSectionAnimations();
+        initMenu();
+        initAnchorScroll();
+        initContactForm();
+        initDesktopNavScroll();
 
-    // Fix for refresh jump
-    if (window.location.hash) {
-        window.history.replaceState("", document.title, window.location.pathname + window.location.search);
-        window.scrollTo(0, 0);
+        if (elements.langToggle) {
+            elements.langToggle.addEventListener('click', () => {
+                setLanguage(state.currentLang === 'ru' ? 'en' : 'ru');
+            });
+        }
+
+        if (window.location.hash) {
+            window.history.replaceState('', document.title, window.location.pathname + window.location.search);
+            window.scrollTo(0, 0);
+        }
     }
 
-
+    init();
 });
