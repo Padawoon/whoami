@@ -312,6 +312,10 @@ h1 {
     border: none;
 }
 
+#submitBtn {
+    min-width: 260px;
+}
+
 .btn-primary {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
