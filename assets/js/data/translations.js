@@ -10,7 +10,7 @@ export const translations = {
         nav_skills: "Навыки",
         nav_contact: "Контакты",
         about_title: "О себе",
-        about_text: `Более трёх лет опыта в качестве QA инженера, работал в командах, использующих методологии Scrum, Lean и в хаотичной разработке.<br>
+        about_text: `Более четырёх лет опыта в качестве QA инженера, работал в командах, использующих методологии Scrum, Lean и в хаотичной разработке.<br>
 Уверенно работаю с таск-трекерами и ТМС (YouTrack, Jira, ClickUp, QAcoverage, Qase, Doqa).<br>
 Разрабатываю и поддерживаю тестовую документацию: тест-кейсы, чек-листы и прочие артефакты.<br>
 Тестирую RESTful API с помощью инструментов Postman, Swagger и др.<br>
@@ -103,7 +103,7 @@ export const translations = {
         nav_skills: "Skills",
         nav_contact: "Contact",
         about_title: "Profile",
-        about_text: `Having more than three years of experience as a QA engineer, worked in teams using Scrum, Lean, and fully chaotic development.<br>
+        about_text: `Having more than four years of experience as a QA engineer, worked in teams using Scrum, Lean, and fully chaotic development.<br>
 Confident working with task trackers and test management systems (YouTrack, Jira, ClickUp, QAcoverage, Qase, Doqa).<br>
 Creating and maintaining test documentation: test cases, checklists, and other QA artifacts.<br>
 Testing RESTful APIs using Postman, Swagger etc.<br>
