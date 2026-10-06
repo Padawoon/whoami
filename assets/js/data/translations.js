@@ -89,7 +89,7 @@ export const translations = {
         form_success: "Сообщение успешно отправлено!",
         form_error: "Произошла ошибка при отправке сообщения.",
         form_validation_required: "Пожалуйста, заполните это поле.",
-        server_error: "Не удалось связаться с сервером."
+        server_error: "Не удалось связаться с сервером. Пожалуйста попробуйте позже."
     },
     en: {
         name: "Dmitrii Khitryi",
@@ -184,6 +184,6 @@ Understand the key differences between microservice architecture and a monolith 
         form_success: "Message sent successfully!",
         form_error: "An error occurred while sending the message.",
         form_validation_required: "Please fill out this field.",
-        server_error: "Could not connect to the server."
+        server_error: "Could not connect to the server. Please try again later."
     }
 };
