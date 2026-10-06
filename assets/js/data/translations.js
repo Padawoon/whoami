@@ -16,8 +16,7 @@ export const translations = {
 Тестирую RESTful API с помощью инструментов Postman, Swagger и др.<br>
 Работаю с БД: пишу сложные запросы с джойнами и агрегациями, проверяю миграции и результаты сидеров, смотрю наличие индексов, погружаюсь в ERD.<br>
 Имею опыт работы в Linux: анализ логов, проверка портов сервисов, работа с конфигами и энвами.<br>
-Понимаю git: ставлю ветки для тестов, запускаю пайплайны в Gitlab.<br>
-Это же касается и работы с Android Studio.<br>
+Пользуюсь git: ставлю ветки для тестов, запускаю пайплайны в Gitlab.<br>
 Знаю в чём ключевая разница микросервисной архитектуры от монолита и как это влияет на тестирование.`,
         experience_title: "Опыт работы",
         experience: [
@@ -109,7 +108,7 @@ Creating and maintaining test documentation: test cases, checklists, and other Q
 Testing RESTful APIs using Postman, Swagger etc.<br>
 Working with databases: write complex queries with joins and aggregations, validate migrations and seed results, check indexes, and analyze ERDs.<br>
 Experienced with Linux: log analysis, service port checks, working with configs and env files.<br>
-Understand Git: switching between branches for testing, run pipelines in Gitlab for frontend and backend. Same for Android Studio for mobile testing.<br>
+Git: switching between branches for testing, run pipelines in Gitlab for frontend and backend.<br>
 Understand the key differences between microservice architecture and a monolith and how this affects testing.`,
         experience_title: "Experience",
         experience: [
