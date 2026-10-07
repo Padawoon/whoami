@@ -10,14 +10,11 @@ export const translations = {
         nav_skills: "Навыки",
         nav_contact: "Контакты",
         about_title: "О себе",
-        about_text: `Более четырёх лет опыта в качестве QA инженера, работал в командах, использующих методологии Scrum, Lean и в хаотичной разработке.<br>
-Уверенно работаю с таск-трекерами и ТМС (YouTrack, Jira, ClickUp, QAcoverage, Qase, Doqa).<br>
-Разрабатываю и поддерживаю тестовую документацию: тест-кейсы, чек-листы и прочие артефакты.<br>
-Тестирую RESTful API с помощью инструментов Postman, Swagger и др.<br>
-Работаю с БД: пишу сложные запросы с джойнами и агрегациями, проверяю миграции и результаты сидеров, смотрю наличие индексов, погружаюсь в ERD.<br>
-Имею опыт работы в Linux: анализ логов, проверка портов сервисов, работа с конфигами и энвами.<br>
-Пользуюсь git: ставлю ветки для тестов, запускаю пайплайны в Gitlab.<br>
-Знаю в чём ключевая разница микросервисной архитектуры от монолита и как это влияет на тестирование.`,
+        about_text: `QA Инженер с опытом более 4-х лет в тестировании микросервисных веб-приложений и сложных бэкенд-систем.
+                    Специализируюсь на API, базах данных (SQL) и интеграционном тестировании.
+                    На одном из проектов самостоятельно внедрил TMS Qase, переведя весь отдел с Google Docs и централизовав тестовую документацию.
+                    В одиночку обеспечил качество крупного релиза (8 user stories), не пропустив в продакшен ни одного дефекта.
+                    Автоматизирую тесты UI, API и БД на Python + Playwright, включая полные E2E тесты.`,
         experience_title: "Опыт работы",
         experience: [
             {
@@ -25,13 +22,18 @@ export const translations = {
                 company: "Web-studio Regul",
                 date: "01/2025 – Настоящее время",
                 items: [
-                    "Тестирование микросервисов на всех этапах (dev/staging/production), верификация взаимодействия через REST API и RabbitMQ.",
-                    "Работа с СУБД (PostgreSQL/MySQL): написание сложных запросов (джойны, вложенные, агрегации), проверка миграций, сидов и наличия индексов.",
-                    "Работа с Git и GitLab: запуск пайплайнов для бэкенда и фронтенда, ручное переключение веток для тестирования мобильных (iOS/Android/MacOS) приложений.",
-                    "Анализ RabbitMQ-событий (биллинг и платежи), создание и проверка тестовых сценариев на генерацию инвойсов.",
-                    "Локализация инцидентов (L3 поддержка): анализ логов, БД, сопоставление бизнес-процессов с запросами, подготовка отчётов RCA.",
-                    "<strong>Достижение:</strong> В одиночку обеспечил полный цикл тестирования релиза из 8 полноценных стори (реворки роутов, миграции, биллинг) без дефектов в продакшене.",
-                    "<strong>Достижение:</strong> По результатам успешного года работы повышен до Senior (Старший специалист по тестированию серверной логики и БД)."
+                    "Обеспечил качество релиза AI-платформы (8+ user stories), включавшего изменения в микросервисах, миграции БД и новую логику биллинга; в результате в продакшен не попало ни одного критического дефекта.",
+                    "Взял на себя тестирование сложной логики биллинга для AI-сервисов, включая проверку тарификации по токенам и обработку событий через RabbitMQ, что предотвратило потенциальные финансовые ошибки.",
+                    "Выступал в роли L3-поддержки: самостоятельно локализовывал инциденты, анализируя логи, БД и бизнес-процессы, и готовил отчеты по первопричинам (RCA).",
+                    "Менторил и проводил онбординг новых QA-инженеров, помогая им быстрее войти в проект и начать приносить пользу команде."
+                ]
+            },
+            {
+                role: "Перерыв в карьере",
+                company: "Переезд",
+                date: "09/2024 – 12/2024",
+                items: [
+                    "Переезд в Сербию, обустройство и профессиональное развитие"
                 ]
             },
             {
@@ -39,10 +41,9 @@ export const translations = {
                 company: "101 Интернет",
                 date: "10/2023 – 08/2024",
                 items: [
-                    "Ручное тестирование веб-приложения с микросервисной архитектурой (Smoke, Regression, E2E).",
-                    "Разработка и поддержка тестовой документации, работа в Яндекс.Трекере.",
-                    "Самостоятельно внедрил TMS Qase: перевёл отдел с Google Docs на структурированное хранение и курировал поддержку.",
-                    "Использование инструментов: JAM, Chrome DevTools, GraphQL Network, Postman, DBeaver, MongoDB Compass."
+                    "Инициировал и самостоятельно внедрил TMS Qase, переведя всю тестовую документацию отдела из Google Docs. Это централизовало тест-кейсы и ускорило подготовку к регрессионному тестированию.",
+                    "Проводил ручное тестирование (регрессионное, e2e, смоук) для веб-приложения с микросервисной архитектурой, работая в связке с командой разработки для обеспечения качества релизов.",
+                    "Тестировал API с использованием Postman и GraphQL Network, проверяя интеграцию между сервисами и корректность обработки данных."
                 ]
             },
             {
@@ -50,10 +51,8 @@ export const translations = {
                 company: "base86",
                 date: "04/2023 – 10/2023",
                 items: [
-                    "Ручное тестирование B2B маркетплейса для стоматологических клиник (США).",
-                    "Разработка и поддержка тестовой документации в Qase.",
-                    "Успешно выявил и отследил причину более 20 критических багов, предотвратив срыв релизов.",
-                    "Обеспечил качественный онбординг и менторство для 5 QA стажёров."
+                    "Выявил и задокументировал более 20 критических дефектов, что позволило предотвратить срыв релиза и обеспечить стабильность платформы для B2B-клиентов.",
+                    "Проводил онбординг и менторил 5 QA-стажеров, помогая им освоить процессы тестирования и инструменты (Qase, Jira), что ускорило рост команды."
                 ]
             },
             {
@@ -61,10 +60,8 @@ export const translations = {
                 company: "Hansa",
                 date: "10/2021 – 07/2022",
                 items: [
-                    "Активное участие в разработке и тестировании интернет-магазина shop.hansa.ru.",
-                    "Проведение исследовательского и Ad hoc тестирования пользовательского интерфейса (UI).",
-                    "Тестирование интеграции систем CMS и ERP.",
-                    "Разработка концепции rich-контента для Hansa, используемой во всех каналах продаж."
+                    "Протестировал ключевую интеграцию нового онлайн-магазина со складской системой (CMS <> ERP), выявив и устранив 5+ блокеров, связанных с некорректной синхронизацией остатков и цен.",
+                    "Проводил исследовательское тестирование UI/UX, по результатам которого было составлено 60+ баг-репортов и предложений по улучшению, принятых командой в работу для повышения юзабилити сайта."
                 ]
             }
         ],
@@ -102,14 +99,10 @@ export const translations = {
         nav_skills: "Skills",
         nav_contact: "Contact",
         about_title: "Profile",
-        about_text: `Having more than four years of experience as a QA engineer, worked in teams using Scrum, Lean, and fully chaotic development.<br>
-Confident working with task trackers and test management systems (YouTrack, Jira, ClickUp, QAcoverage, Qase, Doqa).<br>
-Creating and maintaining test documentation: test cases, checklists, and other QA artifacts.<br>
-Testing RESTful APIs using Postman, Swagger etc.<br>
-Working with databases: write complex queries with joins and aggregations, validate migrations and seed results, check indexes, and analyze ERDs.<br>
-Experienced with Linux: log analysis, service port checks, working with configs and env files.<br>
-Git: switching between branches for testing, run pipelines in Gitlab for frontend and backend.<br>
-Understand the key differences between microservice architecture and a monolith and how this affects testing.`,
+        about_text: `QA Engineer with over 4 years of experience in testing microservice web applications and complex backend systems.
+                    Specializing in API, databases (SQL), and integration testing.
+                    Independently implemented TMS Qase, migrating the entire department from Google Docs and centralizing test documentation.
+                    Single-handedly ensured the quality of a major release (8 user stories), allowing zero defects into production.`,
         experience_title: "Experience",
         experience: [
             {
@@ -117,16 +110,18 @@ Understand the key differences between microservice architecture and a monolith 
                 company: "Web-studio Regul, LLC",
                 date: "01/2025 – Present",
                 items: [
-                    "Design and execution of functional, integration, and regression testing of microservices across dev, staging, and production environments.",
-                    "Testing services interactions via REST API and RabbitMQ.",
-                    "Analysis of database schemas, complex relations, and business logic at the data level.",
-                    "Writing SQL queries (PostgreSQL/MySQL): aggregations, joins, nested queries.",
-                    "Validation of migrations, seed data, and data integrity.",
-                    "Work with Git: Launching pipelines for deployment and switching branches in Android Studio to test MacOS, iOS, and Android native apps.",
-                    "Billing & calculation verification: Validation of pricing models, token-based cost calculations, USD conversions, and invoice generation scenarios.",
-                    "L3 support: Incident localization, log analysis, root cause description (RCA), and working within a three-line support model.",
-                    "<strong>Achievement:</strong> Single-handedly completed the full testing cycle of a large release containing 8 full-scale stories without a single defect making it to production.",
-                    "<strong>Achievement:</strong> Based on a highly successful year, my grade was raised to Senior (Senior Specialist in Server Logic and Database Testing)."
+                    "Ensured the quality of an AI platform release (8+ user stories), which included changes in microservices, DB migrations, and new billing logic; as a result, zero critical defects reached production.",
+                    "Took ownership of testing complex billing logic for AI services, including token-based pricing verification and event processing via RabbitMQ, preventing potential financial errors.",
+                    "Acted as L3 Support: independently localized incidents by analyzing logs, databases, and business processes, and prepared root cause analysis (RCA) reports.",
+                    "Mentored and onboarded new QA engineers, helping them integrate into the project faster and start delivering value tothe team."
+                ]
+            },
+                        {
+                role: "Career Break",
+                company: "Relocation",
+                date: "09/2024 – 12/2024",
+                items: [
+                    "Relocation to Serbia, settling in, and professional development"
                 ]
             },
             {
@@ -134,10 +129,9 @@ Understand the key differences between microservice architecture and a monolith 
                 company: "101 internet",
                 date: "10/2023 – 08/2024",
                 items: [
-                    "Manual microservice-based web app testing (Smoke, Regression, E2E, UAT).",
-                    "Writing and maintaining test documentation in Yandex.Tracker.",
-                    "Solely introduced and operationalized the Qase test management system.",
-                    "Utilized tools: JAM, Chrome DevTools, GraphQL Network, Postman, DBeaver, MongoDB Compass."
+                    "Initiated and independently implemented TMS Qase, migrating all of the department's test documentation from Google Docs. This centralized test cases and accelerated regression testing preparation.",
+                    "Conducted manual testing (regression, e2e, smoke) for a web application with microservice architecture, working in tandem with the development team to ensure release quality.",
+                    "Tested API using Postman and GraphQL Network, verifying integration between services and data processing correctness."
                 ]
             },
             {
@@ -145,10 +139,8 @@ Understand the key differences between microservice architecture and a monolith 
                 company: "base86",
                 date: "04/2023 – 10/2023",
                 items: [
-                    "Conducted comprehensive testing on a B2B marketplace web application (USA).",
-                    "Developed and managed test cases for smoke and regression testing in Qase.",
-                    "Successfully resolved 20+ critical issues and blockers, preserving release schedules.",
-                    "Mentored and onboarded five QA interns, enhancing team productivity."
+                    "Identified and documented over 20 critical defects, which prevented a release failure and ensured platform stability for B2B clients.",
+                    "Conducted onboarding and mentored 5 QA interns, helping them master testing processes and tools (Qase, Jira), which accelerated team growth."
                 ]
             },
             {
@@ -156,10 +148,9 @@ Understand the key differences between microservice architecture and a monolith 
                 company: "Hansa",
                 date: "10/2021 – 07/2022",
                 items: [
-                    "Actively contributed to the development and testing of the shop.hansa.ru online store.",
-                    "Conducted comprehensive exploratory and ad hoc testing of the UI.",
-                    "Assessed and evaluated content and layout quality assurance.",
-                    "Pioneered the creation of a basic rich content concept for Hansa, still used across all channels."
+                    "Tested the key integration between the new online store and the warehouse system (CMS <> ERP), identifying and resolving 5+ blockers related to incorrect stock and price synchronization.",
+                    "Participated in the launch of a new rich-content format: verified display correctness across various devices and platforms, ensuring a unified user experience across all sales channels.",
+                    "Conducted exploratory UI/UX testing, resulting in 60+ bug reports and improvement suggestions, which were accepted by the team to enhance website usability."
                 ]
             }
         ],
