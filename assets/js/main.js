@@ -136,10 +136,23 @@
     counterBtn.classList.remove('bump'); void counterBtn.offsetWidth; counterBtn.classList.add('bump');
   }
   var toastEl = null;
-  function toast(msg) {
+  function toast(msg, href, ms) {
     if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl); }
-    toastEl.textContent = msg; toastEl.hidden = false;
-    clearTimeout(toastEl._t); toastEl._t = setTimeout(function () { toastEl.hidden = true; }, 2200);
+    toastEl.textContent = msg;
+    if (href) { var a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '@dkhitryi'; toastEl.appendChild(a); }
+    toastEl.hidden = false;
+    clearTimeout(toastEl._t); toastEl._t = setTimeout(function () { toastEl.hidden = true; }, ms || 2200);
+  }
+
+  /* Третий прихлопнутый жук за визит открывает Telegram, как клик по ссылке. Один раз за визит. */
+  var TG = 'https://t.me/dkhitryi', kills = 0;
+  function openTelegram() {
+    toast(t('tg_go'), null, 2600);
+    setTimeout(function () {
+      var w = null;
+      try { w = window.open(TG, '_blank'); } catch (e) {}
+      if (w) { try { w.opener = null; } catch (e) {} } else { toast(t('tg_blocked'), TG, 8000); }
+    }, 700);
   }
 
   /* Жуки: ползут по краям экрана, в том числе по диагонали. Не больше трёх одновременно. */
@@ -239,6 +252,8 @@
     document.body.appendChild(pop);
     pop.addEventListener('animationend', function () { pop.remove(); });
     remove(); bumpCount();
+    kills++;
+    if (kills === 3) openTelegram();
   }
   counterBtn.addEventListener('click', function () {
     if (bugs.length >= MAX_BUGS) {
